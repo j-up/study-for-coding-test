@@ -12,6 +12,10 @@ public class Main {
 		int y = input.charAt(1) - '0';
         //int y = Character.getNumericValue((input.charAt(1)));
         
+		// 나이트가 움직일 수 있는 방향을 정의해놓고 계산하면 더 효율적
+		// int[] dx = {-2, -1, 1, 2, 2, 1, -1, -2};
+        // int[] dy = {-1, -2, -2, -1, 1, 2, 2, 1};
+
         result = result + suZicMove(x,y);
         result = result + suPungMove(x,y);
   
