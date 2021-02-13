@@ -29,9 +29,9 @@ public class Main {
           a[i] = b[i];
           b[i] = temp;
           k--;
-        } else {
-		  break; 
-		}
+        } else{
+	  break; 
+	}
 
         i++;  
 
