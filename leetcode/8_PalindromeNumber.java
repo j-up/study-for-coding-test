@@ -1,19 +1,19 @@
 class Solution {
-    public int reverse(int x) {
-        long sum=0;
-        int booho = x>0?1:-1;
-        x=Math.abs(x);
-        int mul=(int)Math.log10(x);
-        
-        while(x>0){
-            int remains = x%10;
-            x = x/10;
-            sum+=(remains*Math.pow(10,mul));
-            if(sum>Integer.MAX_VALUE)
-                return 0;
-            mul--;
+    public boolean isPalindrome(int x) {
+        if(x<0) {
+            return false;
         }
-        
-        return (int)sum*booho;
+
+        int reversNumber = 0;
+        int remainder = 0;
+        int original = x;
+
+        while(x!=0) {
+            remainder = x % 10;
+            reversNumber = reversNumber * 10 + remainder;
+            x = x/10;
+        }
+
+        return original == reversNumber;
     }
 }

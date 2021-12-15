@@ -1,19 +1,20 @@
+import kotlin.math.*
+import java.lang.Math.pow
+
 class Solution {
-    public int reverse(int x) {
-        long sum=0;
-        int booho = x>0?1:-1;
-        x=Math.abs(x);
-        int mul=(int)Math.log10(x);
-        
-        while(x>0){
-            int remains = x%10;
-            x = x/10;
-            sum+=(remains*Math.pow(10,mul));
-            if(sum>Integer.MAX_VALUE)
-                return 0;
-            mul--;
+    fun reverse(x: Int): Int {
+        var x = x
+        var sum: Long = 0
+        val booho = if (x > 0) 1 else -1
+        x = abs(x)
+        var mul = log10(x.toDouble()).toInt()
+        while (x > 0) {
+            val remains = x % 10
+            x = x / 10
+            sum = sum + (remains * pow(10.0, mul.toDouble())).toLong()
+            if (sum > Int.MAX_VALUE) return 0
+            mul--
         }
-        
-        return (int)sum*booho;
+        return sum.toInt() * booho
     }
 }

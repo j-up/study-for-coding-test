@@ -1,49 +1,41 @@
-fun longestPalindrome(s: String): String {
-        if(s.length == 1) {
+class Solution {
+    fun convert(s: String, numRows: Int): String? {
+        if (numRows == 1) {
             return s
         }
+        val space = (numRows - 1) * 2
+        var ret = ""
 
-        dpValue = Array(s.length) {IntArray(s.length)}
+        for (i in s.indices step space) {
+            ret = ret + s[i]
+        }
 
-        var result = ""
+        var space2 = space
+        var space3 = 0
 
-        for(i in s.indices) {
-            for(j in i until s.length) {
-                val len = j-i+1
+        for (i in 1 until numRows - 1) {
+            space2 = space2 - 2
+            space3 = space3 + 2
 
-                if(calc(s, i, j) == IS_PALINDROME) {
-                    if(len > result.length) {
-                        result = s.substring(i, j+1)
-                    }
+            var toogle = true
+            var j = i
+
+            while (j < s.length) {
+                ret = ret + s[j]
+                j = if (toogle) {
+                    j + space2
+                } else {
+                    j + space3
                 }
+                toogle = !toogle
             }
         }
 
-        return result
-    }
-
-    private fun calc(s: String, start: Int, end: Int): Int {
-        if(dpValue[start][end] != 0) {
-            return dpValue[start][end]
+        var i = numRows - 1
+        while (i < s.length) {
+            ret = ret + s[i]
+            i = i + space
         }
-
-        if(start >= end) {
-            return IS_PALINDROME
-        }
-
-        var isPalindrome = IS_NOT_PALINDROME
-
-        if(s[start] == s[end]) {
-            isPalindrome = calc(s, start+1, end-1)
-        }
-
-        dpValue[start][end] = isPalindrome
-
-        return isPalindrome
+        return ret
     }
-
-    companion object {
-        lateinit var dpValue:Array<IntArray>
-        private val IS_PALINDROME = 2
-        private val IS_NOT_PALINDROME = 1
-    }
+}
